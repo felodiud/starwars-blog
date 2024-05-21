@@ -5,6 +5,7 @@ import Card from "../components/Card";
 function Landing() {
     const { store, actions } = useContext(Context);
 
+
     useEffect(() => {
         const fetchData = async () => {
           await actions.getApi();
@@ -16,8 +17,16 @@ function Landing() {
     return (
         
         <div className="row row-cols-1 row-cols-md-5 g-4">
-            {store.startList.length > 0 ? (store.startList.map((item, index) => (
-            <Card key={index} title={item.category} link={item.url} />))) : (<p>Loading...</p>)}
+            {store.startList.length > 0 ? (store.startList.map((item, 
+            index) => (
+            <Card 
+              key={index} 
+              src={`https://starwars-visualguide.com/assets/img/categories/${item.category}.jpg`} 
+              title={item.category} 
+              link={item.url}
+              btnName="Learn more" 
+            />
+            ))) : (<p>Loading...</p>)}
         </div>  
         
 

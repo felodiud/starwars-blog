@@ -22,9 +22,8 @@ const Navbar = () => {
             </button>
             <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
             
-            <form className="d-flex" role="search">
-                <button className="btn btn-outline-success me-2 btn-lg" type="submit"><i class="bi bi-star-fill"></i></button>
-            </form>
+            
+            <button className="btn btn-outline-success me-2 btn-lg" ><i class="bi bi-star-fill"></i></button>
             </div>
         </div>
         </nav>

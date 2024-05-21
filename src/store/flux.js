@@ -1,23 +1,20 @@
+import { PeopleDetail } from "../pages/details/PeopleDetal";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      peopleObject: {},
       peopleList: [],
+      peopleDetail: [],
       favoriteList: [],
       startList: [],
+      originalStartList: [],
       planetList: [],
+      filmsList: [],
+      filmDetail: [],
+      chgaracterDetail: [],
     },
     actions: {
-      getPeople: async () => {
-        try {
-          const response = await fetch("https://www.swapi.tech/api/people/");
-          const data = await response.json();
-          console.log(data);
-          return data; // Return the data from the action
-        } catch (error) {
-          console.error(error);
-          throw error; // Rethrow the error to be caught in the component
-        }
-      },
       getApi: () => {
         fetch("https://www.swapi.tech/api/", {
           method: "GET",
@@ -25,15 +22,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log(data);
             const apiList = Object.entries(data.result).map(
-              ([category, url]) => ({
-                category,
-                url,
-              })
+              ([category, url]) => {
+                if (category === "people") {
+                  category = "character";
+                }
+                return {
+                  category,
+                  url,
+                };
+              }
             );
+
             setStore({ startList: apiList });
           })
-
           .catch((error) => console.log(error));
       },
 
@@ -46,6 +49,59 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => setStore({ planetList: data.results }))
 
           .catch((error) => console.log(error));
+      },
+
+      getPeople: (link) => {
+        fetch(`${link}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({ peopleObject: data });
+          })
+          .catch((error) => console.log(error));
+      },
+
+      getPeopleDetail: (link) => {
+        fetch(`${link}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => setStore({ peopleDetail: data.result }))
+          .catch((err) => console.log(err));
+      },
+
+      getFilms: () => {
+        fetch("https://www.swapi.tech/api/films/", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => setStore({ filmsList: data.result }))
+
+          .catch((error) => console.log(error));
+      },
+
+      getFilmDetail: (link) => {
+        fetch(`${link}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => setStore({ filmDetail: data.result }))
+          .catch((err) => console.log(err));
+      },
+
+      getCharacterDetail: (link) => {
+        fetch(`${link}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => setStore({ characterDetail: data.result.properties }))
+          .catch((err) => console.log(err));
       },
     },
   };

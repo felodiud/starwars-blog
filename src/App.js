@@ -6,6 +6,9 @@ import Films from "./pages/Films";
 import Planets from "./pages/Planets";
 import Navbar from "./components/Navbar";
 import injectContext from "./store/context";
+import { FilmDetail } from "./pages/details/FilmDetail";
+import People from "./pages/People";
+import { PeopleDetail } from "./pages/details/PeopleDetal";
 
 function App() {
   return (
@@ -13,8 +16,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/Films" element={<Films />} />
-        <Route path="/Planets" element={<Planets />} />
+        <Route path="/films" element={<Films />} />
+        <Route path="/films/:id" element={<FilmDetail />} />
+        <Route path="/character" element={<People />} />
+        <Route path="/character/:id" element={<PeopleDetail />} />
+        <Route path="/planets" element={<Planets />} />
       </Routes>
     </BrowserRouter>
   );
