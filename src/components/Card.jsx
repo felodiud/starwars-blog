@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { BtnFavorite } from "./BtnFavorite";
 
 
 
 const Card = (props) => {
 
-    const { title, src, description, learnMore, btnName, id, to, favoritable } = props
+    const { title, src, description, learnMore, btnName, exists , to, favoritable, favoriteClick, object, object2 } = props
     const buttonText = learnMore ? "Learn More" : title;
 
     return (
@@ -23,7 +22,7 @@ const Card = (props) => {
                         <a href={`${title}`}  className="btn btn-primary">{ btnName ? btnName: title }</a>
                     )}
                     {favoritable ? (<div className = "col d-flex justify-content-end">
-                        <BtnFavorite />
+                        <BtnFavorite onClick={favoriteClick} exists={exists} object={object} object2={object2}/>
                     </div>) : ''}
                     
                 </div>

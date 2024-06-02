@@ -9,6 +9,9 @@ import injectContext from "./store/context";
 import { FilmDetail } from "./pages/details/FilmDetail";
 import People from "./pages/People";
 import { PeopleDetail } from "./pages/details/PeopleDetal";
+import "bootstrap/dist/css/bootstrap.min.css"; // Importa el CSS de Bootstrap
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { createPopper } from "@popperjs/core";
 
 function App() {
   return (

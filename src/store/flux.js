@@ -23,8 +23,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
-            const apiList = Object.entries(data.result).map(
-              ([category, url]) => {
+            const apiList = Object.entries(data.result)
+              .filter(
+                ([category]) =>
+                  !["starships", "vehicles", "species"].includes(category)
+              )
+              .map(([category, url]) => {
                 if (category === "people") {
                   category = "character";
                 }
@@ -32,8 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                   category,
                   url,
                 };
-              }
-            );
+              });
 
             setStore({ startList: apiList });
           })
@@ -102,6 +105,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => setStore({ characterDetail: data.result.properties }))
           .catch((err) => console.log(err));
+      },
+
+      handleFavorite: (favorite) => {
+        const store = getStore();
+        if (store.favoriteList.includes(favorite)) {
+          const updatedList = store.favoriteList.filter(
+            (item) => item !== favorite
+          );
+          setStore({ favoriteList: updatedList });
+          console.log("Favorito eliminado");
+        }
+        setStore({ favoriteList: [...store.favoriteList, favorite] });
+        return console.log(store.favoriteList);
       },
     },
   };

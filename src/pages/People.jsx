@@ -3,8 +3,6 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Context } from "../store/context";
 import Card from "../components/Card";
-import { FilmDetail } from "./details/FilmDetail";
-import { Link } from "react-router-dom";
 import '../css/style.css'
 
 function People() {
@@ -32,7 +30,7 @@ function People() {
 
 
   console.log(store.peopleObject);
-  console.log(maxCurrent)
+
   
 
   const handleNext = () => {
@@ -114,6 +112,9 @@ function People() {
                 src={`https://starwars-visualguide.com/assets/img/characters/${item.uid}.jpg`}  
                 btnName="Learn more"
                 to={`/character/${item.uid}`}
+                object={item}
+                object2={store.favoriteList}
+                favoriteClick={() => actions.handleFavorite(item.name)}
                 favoritable/>
             </div>
           
