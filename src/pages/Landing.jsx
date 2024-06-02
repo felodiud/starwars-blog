@@ -2,6 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/context";
 import Card from "../components/Card";
 
+
+
+// POR ALGUNA RAZON MI VERSION DE RECT EMPEZO A DAR PROBLEMAS Y NO FUI CAPAS DE SOLUCIONARLO LO QUE CAUSA QUE NO FUNCIONE CORRECTAMENTE CON EL COLLAPSE DE BOOTSTRAP
+
+
+
 function Landing() {
     const { store, actions } = useContext(Context);
 
